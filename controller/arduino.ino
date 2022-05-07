@@ -10,8 +10,6 @@ int coordinates[2];
 
 int x, y, targetX, targetY;
 
-
-
 #include <Servo.h>
 
 Servo servoX; // create servo object to control a servo
