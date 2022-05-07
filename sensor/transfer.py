@@ -4,15 +4,15 @@ from parameters import *
 
 ArduinoSerial = serial.Serial(com_port, com_speed)  # создаем объект для работы с портом последовательной связи
 time.sleep(2)  # ждем 2 секунды чтобы установилась последовательная связь
-print(ArduinoSerial.readline())  # считываем данные из последовательного порта и печатаем их в виде строки
 
 
 def transfer_coordinates(coordinates):
     x = coordinates[0]
     y = coordinates[1]
+    print(bin(x), bin(y))
 
-    bin_x = bin(x)[2:]
-    bin_y = bin(y)[2:]
+    bin_x = bin(x).replace("0b", "")
+    bin_y = bin(y).replace("0b", "")
 
     while len(bin_x) < byte_length:
         bin_x = '0' + bin_x
@@ -22,6 +22,7 @@ def transfer_coordinates(coordinates):
 
     print(bin_x, bin_y)
     bin_coordinates = bin_x + bin_y
-    print(bytes(bin_coordinates, 'ascii'))
+    bin_coordinates = bytes(bin_coordinates, 'ascii')
+    print(bin_coordinates)
     ArduinoSerial.write(bin_coordinates)
     time.sleep(1)
