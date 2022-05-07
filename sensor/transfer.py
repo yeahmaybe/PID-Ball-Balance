@@ -2,15 +2,12 @@ import serial  # подключаем библиотеку для последо
 import time  # подключаем библиотеку чтобы задействовать функции задержки в программе
 from parameters import *
 
-ArduinoSerial = serial.Serial(com_port, com_speed)  # создаем объект для работы с портом последовательной связи
-time.sleep(2)  # ждем 2 секунды чтобы установилась последовательная связь
-
+arduino = serial.Serial(port=com_port, baudrate=com_speed, timeout=.1)
+time.sleep(1)  # ждем 2 секунды чтобы установилась последовательная связь
 
 def transfer_coordinates(coordinates):
     x = coordinates[0]
     y = coordinates[1]
-    print(bin(x), bin(y))
-
     bin_x = bin(x).replace("0b", "")
     bin_y = bin(y).replace("0b", "")
 
@@ -20,9 +17,11 @@ def transfer_coordinates(coordinates):
     while len(bin_y) < byte_length:
         bin_y = '0' + bin_y
 
-    print(bin_x, bin_y)
-    bin_coordinates = bin_x + bin_y
+    #print(bin_x, bin_y)
+    bin_coordinates = bin_x + bin_y + ";"
     bin_coordinates = bytes(bin_coordinates, 'ascii')
-    print(bin_coordinates)
-    ArduinoSerial.write(bin_coordinates)
-    time.sleep(1)
+    #print(bin_coordinates)
+    arduino.write(bin_coordinates)
+    data = arduino.readline()
+    print(data)
+    time.sleep(0.2)
