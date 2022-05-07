@@ -12,7 +12,6 @@ int x, y, targetX, targetY;
 
 
 
-
 #include <Servo.h>
 
 Servo servoX; // create servo object to control a servo
@@ -21,7 +20,6 @@ Servo servoY; // create servo object to control a
 int potpin = A0; // analog pin used to connect the potentiometer
 int val; // variable to read the value from the analog pin
 int up, down, mid;
-
 
 void setup() {
 Serial.begin(9600); //инициализируем последовательную связь на COM порту со скоростью 9600 бод/с
@@ -34,16 +32,16 @@ servoY.attach(8);
 }
 
   void readCoordinates() {
-  int coordinates[2];
-  int v = 0;
-  while (Serial.available() > 0) {
-  char data = Serial.read();
-  if(data == '1') {
-  v = v*2 + 1;
-  }
-  if(data == '0') {
-  v = v*2;
-  }
+    int coordinates[2];
+    int v = 0;
+    while (Serial.available() > 0) {
+    char data = Serial.read();
+    if(data == '1') {
+    v = v*2 + 1;
+    }
+    if(data == '0') {
+    v = v*2;
+    }
   }
   coordinates[0] = v/1024;
   coordinates[1] = v%1024;
