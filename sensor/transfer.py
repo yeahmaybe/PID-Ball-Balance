@@ -3,7 +3,7 @@ import time  # подключаем библиотеку чтобы задейс
 from parameters import *
 
 arduino = serial.Serial(port=com_port, baudrate=com_speed, timeout=.1)
-time.sleep(1)  # ждем 2 секунды чтобы установилась последовательная связь
+time.sleep(1)  # ждем 1 секунду чтобы установилась последовательная связь
 
 def transfer_coordinates(coordinates):
     x = coordinates[0]
@@ -22,6 +22,5 @@ def transfer_coordinates(coordinates):
     bin_coordinates = bytes(bin_coordinates, 'ascii')
     #print(bin_coordinates)
     arduino.write(bin_coordinates)
-    data = arduino.readline()
-    print(data)
-    time.sleep(0.2)
+    #data = arduino.readline()
+    #print(data)

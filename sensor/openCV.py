@@ -33,7 +33,7 @@ def make_mask(color):
 
 def find_circle_center(color, frame_name, bound_color):
     thresh = make_mask(color)
-    cv2.imshow(frame_name, thresh)
+    #cv2.imshow(frame_name, thresh)
     circles = cv2.HoughCircles(thresh.copy(), cv2.HOUGH_GRADIENT, 1, 20, 50, 30, 29, 0)
     circles = np.uint16(np.around(circles))
 

@@ -4,8 +4,8 @@ from parameters import *
 
 import cv2
 
-cap = cv2.VideoCapture(1)
-ball_center = (0,0)
+cap = cv2.VideoCapture(0)
+ball_center = (0, 0)
 while True:
     check_quit()
     success, img = cap.read()
@@ -21,6 +21,9 @@ while True:
     #ball_relative_coordinates = get_coordinates(ball_center, origin)
     if coordinates is not None:
         ball_center = coordinates
+    else:
+        ball_center = (1000, 500)
+
     transfer_coordinates(ball_center)
     print(ball_center)
     cv2.imshow('video', img)
