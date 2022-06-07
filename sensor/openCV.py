@@ -33,7 +33,7 @@ def make_mask(color):
 
 def find_circle_center(color, frame_name, bound_color):
     thresh = make_mask(color)
-    #cv2.imshow(frame_name, thresh)
+    cv2.imshow(frame_name, thresh)
     circles = cv2.HoughCircles(thresh.copy(), cv2.HOUGH_GRADIENT, 1, 20, 50, 30, 29, 0)
     circles = np.uint16(np.around(circles))
 
@@ -84,7 +84,7 @@ COLOR_RANGE = {
     'ball_dark': (np.array((0, 170, 120), np.uint8), np.array((20, 240, 255), np.uint8)),
     'ball_orange': (np.array((0, 153, 100), np.uint8), np.array((153, 255, 255), np.uint8)),
     'field_black': (np.array((15, 15, 15), np.uint8), np.array((100, 100, 100), np.uint8)),
-    'ball_green': (np.array((40, 70, 40), np.uint8), np.array((225, 255, 225), np.uint8)),
+    'ball_green': (np.array((60, 50., 0), np.uint8), np.array((180, 255, 225), np.uint8)),
     'white': (np.array((0, 0, 150), np.uint8), np.array((255, 50, 255), np.uint8)),
 }
 
@@ -99,11 +99,4 @@ def find_ball(color):
     return find_circle_center(color, 'ball detection', green)
 
 
-def get_coordinates(ball_center, origin):
-    if not (ball_center is None or origin is None):
-        x = 0
-        y = 1
-        ball_coordinates = int(ball_center[x]) - int(origin[x]), -(int(ball_center[y]) - int(origin[y]))
-    else:
-        ball_coordinates = None
-    return ball_coordinates
+
